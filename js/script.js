@@ -1,5 +1,7 @@
 let pokemonList = [];
 let allPokemon = [];
+let loadedPokemon = 0;
+let pokemonToLoad = 20;
 
 
 async function getPokemonList() {
@@ -24,7 +26,7 @@ async function getAllPokemon() {
 
 function renderPokemon() {
     let pokemonContainer = document.getElementById('all_pokemon');
-    for (let i = 0; i < allPokemon.length; i++) {
+    for (let i = loadedPokemon; i < (loadedPokemon + pokemonToLoad); i++) {
         const pokemon = allPokemon[i];
         let pokemonName = pokemon['name'];
         let pokemonId = pokemon['id'];
@@ -36,4 +38,13 @@ function renderPokemon() {
             </div>
         `;
     }
+    loadedPokemon = loadedPokemon + pokemonToLoad;
 }
+
+
+window.addEventListener('scroll', function () {
+    console.log(window.scrollY);
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+        renderPokemon();
+    }
+})
