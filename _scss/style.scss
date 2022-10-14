@@ -7,3 +7,128 @@ body {
 * {
     box-sizing: border-box;
 }
+
+body {
+    background-color: #efefef;
+}
+
+#all_pokemon {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 100px 10px;
+}
+
+.one-pokemon:nth-child(odd) {
+    background: url('./../img/bg.png') no-repeat 240% -100%;
+    background-size: 120%;
+    width: 300px;
+    height: 300px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5% 20% 5% 20%;
+}
+
+.one-pokemon:nth-child(even) {
+    background: url('./../img/bg.png') no-repeat 240% 200%;
+    background-size: 120%;
+    width: 300px;
+    height: 300px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 20% 5% 20% 5%;
+}
+
+.normal {
+    background-color: #adac7e !important;
+}
+
+.fire {
+    background-color: #f08639 !important;
+}
+
+.water {
+    background-color: #769af1 !important;
+}
+
+.grass {
+    background-color: #7dca57 !important;
+}
+
+.electric {
+    background-color: #f8d135 !important;
+}
+
+.ice {
+    background-color: #a1dbdc !important;
+}
+
+.fighting {
+    background-color: #cc352c !important;
+}
+
+.poison {
+    background-color: #a842a6 !important;
+}
+
+.ground {
+    background-color: #e2c370 !important;
+}
+
+.flying {
+    background-color: #ab94f0 !important;
+}
+
+.psychic {
+    background-color: #f96491 !important;
+}
+
+.bug {
+    background-color: #adbc21 !important;
+}
+
+.rock {
+    background-color: #bfa73d !important;
+}
+
+.ghost {
+    background-color: #755b9c !important;
+}
+
+.dark {
+    background-color: #755b4c !important;
+}
+
+.dragon {
+    background-color: #753ff8 !important;
+}
+
+.steel {
+    background-color: #bebfd4 !important;
+}
+
+.fairy {
+    background-color: #fe86e9 !important;
+}
+
+.image {
+    background-color: white;
+    width: 150px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    box-shadow: 2px -1px 2px 2px rgba(0, 0, 0, 0.2);
+
+    img {
+        width: 120px;
+        height: 120px;
+    }
+}
