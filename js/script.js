@@ -1,6 +1,26 @@
+let themeSwitchBtns;
 let nextPokemonList = 'https://pokeapi.co/api/v2/pokemon/';
 let loadedPokemons = [];
 let currentPokemon = 0;
+
+
+async function init() {
+    themeChange();
+    loadPokemon();
+}
+
+
+function themeChange() {
+    themeSwitchBtns = document.getElementById('checkbox');
+    themeSwitchBtns.addEventListener('change', event => {
+        let isChecked = event.target.checked;
+        if (isChecked) {
+            document.body.dataset.theme = 'light-theme';
+        } else {
+            document.body.dataset.theme = '';
+        }
+    })
+}
 
 
 async function loadPokemon() {

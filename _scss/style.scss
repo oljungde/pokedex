@@ -1,3 +1,20 @@
+@use 'default-theme';
+@use 'light-theme';
+
+
+$color-background: var(--color-background);
+$color-font: var(--color-font);
+$color-primary: var(--color-primary);
+$color-secondary: var(--color-secondary);
+$color-middle: var(--color-middle);
+$color-light: var(--color-light);
+
+$color-border-075: var(--color-border-075);
+$color-border-2: var(--color-border-2);
+$color-border-5: var(--color-border-5);
+$color-box-shadow-light: var(--color-box-shadow-light);
+
+
 html,
 body {
     margin: 0;
@@ -9,36 +26,87 @@ body {
 }
 
 body {
-    background-color: #efefef;
+    background-color: $color-background;
     display: flex;
     flex-direction: column;
     align-items: center;
     font: 16px 'Lato Regular', sans-serif;
+    color: var(--color-font);
 }
 
 header {
-    background-color: white;
+    background-color: $color-primary;
     width: 100%;
     height: 80px;
     position: sticky;
     top: 0;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 16px;
     padding: 0 32px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid $color-border-075;
+    box-shadow: 0 1px 5px 0 $color-box-shadow-light;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 16px;
 
     img {
-        width: 75px;
-        height: 75px;
+        width: 60px;
+        height: 60px;
         object-fit: cover;
+        transform: rotate(-45deg);
     }
 }
 
 h1,
 h2 {
     margin: 0;
+}
+
+.checkbox {
+    opacity: 0;
+    position: absolute;
+}
+
+.label {
+    width: 50px;
+    height: 26px;
+    background-color: #404040;
+    display: flex;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 5px;
+    padding: 5px;
+    border: 1px solid $color-border-075;
+    position: relative;
+    transform: scale(1.25);
+
+    img {
+        width: 12px;
+        height: 12px;
+        object-fit: cover;
+    }
+}
+
+.ball {
+    width: 20px;
+    height: 20px;
+    background-color: #efefef;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    border-radius: 50%;
+    transition: transform 0.2s linear;
+}
+
+/*  target the elemenent after the label*/
+.checkbox:checked+.label .ball {
+    transform: translateX(24px);
 }
 
 #all_pokemon {
@@ -59,7 +127,7 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-5;
     border-radius: 5% 20% 5% 20%;
     cursor: pointer;
     transition: transform 225ms ease-in-out;
@@ -78,7 +146,7 @@ h2 {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid $color-border-5;
     border-radius: 20% 5% 20% 5%;
     cursor: pointer;
     transition: transform 225ms ease-in-out;
@@ -90,7 +158,7 @@ h2 {
 }
 
 .image {
-    background-color: white;
+    background-color: $color-primary;
     width: 160px;
     height: 160px;
     display: flex;
@@ -98,7 +166,7 @@ h2 {
     align-items: center;
     margin: 10px 0;
     border-radius: 50%;
-    box-shadow: 2px -1px 2px 2px rgba(0, 0, 0, 0.2);
+    box-shadow: 2px -1px 2px 2px $color-border-2;
 
     img {
         width: 110px;
