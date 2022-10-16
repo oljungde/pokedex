@@ -82,13 +82,30 @@ h2 {
   border-radius: 8px;
   font-size: 18px;
   color: #efefef;
-  transform: translateX(-50%);
 }
 .search-input::placeholder {
   color: #a6a6a6;
 }
 .search-input:focus {
   outline: none;
+}
+
+.search-message {
+  background-color: var(--color-font);
+  position: absolute;
+  top: 64px;
+  left: 50%;
+  display: flex;
+  padding: 8px 32px;
+  border: 1px solid var(--color-border-5);
+  border-radius: 8px;
+  color: var(--color-background);
+  transform: scale(0) translateX(-33.3%);
+  transition: transform 225ms ease-in-out;
+}
+
+.search-show {
+  transform: scale(1) translateX(-33.3%);
 }
 
 .checkbox {
