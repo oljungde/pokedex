@@ -1,9 +1,10 @@
 let themeSwitchBtns;
 let nextPokemonList = 'https://pokeapi.co/api/v2/pokemon/';
-let loadedPokemons = [];
+let loadedPokemon = [];
 let currentPokemon = 0;
 let searchInput = document.getElementById('search');
 let searchedPokemon = [];
+let isSearchResult = false;
 
 
 async function init() {
@@ -33,7 +34,7 @@ async function loadPokemon() {
     for (let i = 0; i < responseAsJSON.results.length; i++) {
         let pokemonResponse = await fetch(responseAsJSON.results[i].url);
         let pokemonAsJson = await pokemonResponse.json();
-        loadedPokemons.push(pokemonAsJson);
+        loadedPokemon.push(pokemonAsJson);
     }
     renderAllPokemon();
 }
@@ -41,30 +42,37 @@ async function loadPokemon() {
 
 function renderAllPokemon() {
     let pokemonContainer = document.getElementById('all_pokemon');
-    for (let i = currentPokemon; i < loadedPokemons.length; i++) {
-        const pokemon = loadedPokemons[i];
+    for (let i = currentPokemon; i < loadedPokemon.length; i++) {
+        const pokemon = loadedPokemon[i];
         let pokemonName = pokemon['name'];
         let pokemonFormattedName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
         let pokemonImage = pokemon['sprites']['other']['official-artwork']['front_default'];
-        let pokemonId = i + 1;
+        let pokemonId = pokemon['id'];
         let pokemonType0 = pokemon['types'][0]['type']['name'];
-        pokemonContainer.innerHTML += /*html*/`
-             <div class="one-pokemon ${pokemonType0}">
-                 <h2>${pokemonFormattedName} #${pokemonId}</h2>
-                 <div class="image">
-                    <img src="${pokemonImage}" alt="">
-                 </div>
-                 ${pokemonType0}
-             </div>
-        `;
+        pokemonContainer.innerHTML += pokemonTemplate(pokemonFormattedName, pokemonImage, pokemonId, pokemonType0);
         currentPokemon = i + 1;
     }
 }
 
 
+function pokemonTemplate(name, img, id, type0) {
+    return /*html*/`
+             <div class="one-pokemon ${type0}">
+                 <h2>${name} #${id}</h2>
+                 <div class="image">
+                    <img src="${img}" alt="">
+                 </div>
+                 ${type0}
+             </div>
+    `;
+}
+
+
 window.addEventListener('scroll', function () {
     if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
-        loadPokemon();
+        if (!isSearchResult) {
+            loadPokemon();
+        }
     }
 })
 
@@ -82,18 +90,23 @@ function searchForm() {
 
 async function getSearchTerm() {
     let search = document.getElementById('search').value;
-    if (search.length < 3) {
+    if (search.length == 0) {
+        let pokemonContainer = document.getElementById('all_pokemon');
+        pokemonContainer.innerHTML = '';
+        nextPokemonList = 'https://pokeapi.co/api/v2/pokemon/';
+        loadPokemon();
+        isSearchResult = false;
+    } else if (search.length < 3) {
         console.log('wenig')
         document.getElementById('search_message').classList.add('search-show');
         setTimeout(() => {
             document.getElementById('search_message').classList.remove('search-show');
         }, 1750);
-        // alert('wenig');
+        isSearchResult = false;
     } else {
         console.log(search);
         search = search.toLowerCase();
         loadSearchedPokemon(search);
-
     }
 }
 
@@ -114,5 +127,23 @@ async function loadSearchedPokemon(searchTerm) {
         }
 
     }
+    renderSearchedPokemon();
+    searchedPokemon = [];
+    isSearchResult = true;
+    console.log(searchedPokemon);
+}
 
+
+function renderSearchedPokemon() {
+    let pokemonContainer = document.getElementById('all_pokemon');
+    pokemonContainer.innerHTML = '';
+    for (let i = 0; i < searchedPokemon.length; i++) {
+        const pokemon = searchedPokemon[i];
+        let pokemonName = pokemon['name'];
+        let pokemonFormattedName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
+        let pokemonImage = pokemon['sprites']['other']['official-artwork']['front_default'];
+        let pokemonId = pokemon['id'];
+        let pokemonType0 = pokemon['types'][0]['type']['name'];
+        pokemonContainer.innerHTML += pokemonTemplate(pokemonFormattedName, pokemonImage, pokemonId, pokemonType0);
+    }
 }
