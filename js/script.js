@@ -137,13 +137,17 @@ async function loadSearchedPokemon(searchTerm) {
 function renderSearchedPokemon() {
     let pokemonContainer = document.getElementById('all_pokemon');
     pokemonContainer.innerHTML = '';
-    for (let i = 0; i < searchedPokemon.length; i++) {
-        const pokemon = searchedPokemon[i];
-        let pokemonName = pokemon['name'];
-        let pokemonFormattedName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
-        let pokemonImage = pokemon['sprites']['other']['official-artwork']['front_default'];
-        let pokemonId = pokemon['id'];
-        let pokemonType0 = pokemon['types'][0]['type']['name'];
-        pokemonContainer.innerHTML += pokemonTemplate(pokemonFormattedName, pokemonImage, pokemonId, pokemonType0);
+    if (searchedPokemon.length == 0) {
+        pokemonContainer.innerHTML = '<h2>Sorry! No pokemon found!</h2>';
+    } else {
+        for (let i = 0; i < searchedPokemon.length; i++) {
+            const pokemon = searchedPokemon[i];
+            let pokemonName = pokemon['name'];
+            let pokemonFormattedName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
+            let pokemonImage = pokemon['sprites']['other']['official-artwork']['front_default'];
+            let pokemonId = pokemon['id'];
+            let pokemonType0 = pokemon['types'][0]['type']['name'];
+            pokemonContainer.innerHTML += pokemonTemplate(pokemonFormattedName, pokemonImage, pokemonId, pokemonType0);
+        }
     }
 }

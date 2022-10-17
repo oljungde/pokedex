@@ -47,6 +47,7 @@ header {
     padding: 0 32px;
     border-bottom: 1px solid $color-border-075;
     box-shadow: 0 1px 5px 0 $color-box-shadow-light;
+    z-index: 1;
 
     a {
         color: $color-font;
