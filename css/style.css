@@ -258,9 +258,13 @@ h2 {
 }
 
 .type {
+  background-color: rgba(255, 255, 255, 0.4);
   padding: 4px 8px;
   border: 2px solid var(--color-border-5);
   border-radius: 8px;
+  color: #404040;
+  font-weight: bold;
+  text-align: center;
 }
 
 .normal {
@@ -333,4 +337,77 @@ h2 {
 
 .fairy {
   background-color: #fe86e9 !important;
+}
+
+.normal-light {
+  background-color: rgba(173, 172, 126, 0.7) !important;
+}
+
+.fire-light {
+  background-color: rgba(240, 134, 57, 0.7) !important;
+}
+
+.water-light {
+  background-color: rgba(118, 154, 241, 0.7) !important;
+}
+
+.grass-light {
+  background-color: rgba(125, 202, 87, 0.7) !important;
+}
+
+.electric-light {
+  background-color: rgba(248, 209, 53, 0.7) !important;
+}
+
+.ice-light {
+  background-color: rgba(161, 219, 220, 0.7) !important;
+}
+
+.fighting-light {
+  background-color: rgb(204, 53, 44), 0.7 !important;
+}
+
+.poison-light {
+  background-color: rgba(168, 66, 166, 0.7) !important;
+  color: #dddddd;
+}
+
+.ground-light {
+  background-color: rgba(226, 195, 112, 0.7) !important;
+}
+
+.flying-light {
+  background-color: rgba(171, 148, 240, 0.7) !important;
+}
+
+.psychic-light {
+  background-color: rgba(249, 100, 145, 0.7) !important;
+}
+
+.bug-light {
+  background-color: rgba(173, 188, 33, 0.7) !important;
+}
+
+.rock-light {
+  background-color: rgba(191, 167, 61, 0.7) !important;
+}
+
+.ghost-light {
+  background-color: rgba(117, 91, 156, 0.7) !important;
+}
+
+.dark-light {
+  background-color: rgba(117, 91, 76, 0.7) !important;
+}
+
+.dragon-light {
+  background-color: rgba(117, 63, 248, 0.7) !important;
+}
+
+.steel-light {
+  background-color: rgba(190, 191, 212, 0.7) !important;
+}
+
+.fairy-light {
+  background-color: rgba(254, 134, 233, 0.7) !important;
 }
