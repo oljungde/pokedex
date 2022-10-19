@@ -131,7 +131,7 @@ function pokemonDataTemplate(pokemonIndex, pokemonImage, pokemonType0) {
                 <img src="${pokemonImage}">
             </div>
             <div id="pokemon_types_${pokemonIndex}" class="type-container">
-                <span class="type">${pokemonType0}</span>
+                <span class="type ${pokemonType0}">${pokemonType0}</span>
             </div>                  
         </div>  
     `;
@@ -159,7 +159,7 @@ function renderPokemonSecondType(pokemonIndex) {
  */
 function pokemonSecondTypeTemplate(pokemonType1) {
     return `
-       <span class="type ${pokemonType1}-light">${pokemonType1}</span> 
+       <span class="type ${pokemonType1}">${pokemonType1}</span> 
     `;
 }
 
@@ -367,7 +367,6 @@ function hidePokemonDetails() {
 
 function renderPokemonDetails(pokemonIndex) {
     let pokemonOverlay = document.getElementById('pokemon_overlay');
-    console.log(loadedPokemon);
     let pokemonType0 = loadedPokemon[pokemonIndex]['types'][0]['type']['name'];
     pokemonOverlay.innerHTML = /*html*/`
         <div class="pokemon-details ${pokemonType0}">

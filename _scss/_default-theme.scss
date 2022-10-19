@@ -1,14 +1,12 @@
 body {
     --color-background: #06090d;
     --color-font: #efefef;
-    --color-primary: #121b26;
-    --color-secondary: #364359;
-    --colo--middle: #253140;
-    --color-light: #485b73;
+    --color-font-placeholder: rgba(239, 239, 239, 0.5);
+    --color-primary: #172333;
+    --color-primary-light: #293E59;
 
-    --color-border-075: rgba(255, 255, 255, 0.075);
-    --color-border-2: rgba(255, 255, 255, 0.2);
-    --color-border-primary-2: rgba(18, 27, 38, 0.2);
-    --color-border-5: rgba(255, 255, 255, 0.5);
-    --color-box-shadow-light: rgba(255, 255, 255, 0.05);
+    --color-outer-1: rgba(0, 0, 0, 0.1);
+    --color-outer-3: rgba(0, 0, 0, 0.3);
+    --color-outer-i-05: rgba(255, 255, 255, 0.05);
+    --color-outer-i-1: rgba(255, 255, 255, 0.1);
 }

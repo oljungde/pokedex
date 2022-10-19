@@ -4,16 +4,15 @@
 
 $color-background: var(--color-background);
 $color-font: var(--color-font);
+$color-font-placeholder: var(--color-font-placeholder);
 $color-primary: var(--color-primary);
-$color-secondary: var(--color-secondary);
-$color-middle: var(--color-middle);
-$color-light: var(--color-light);
+$color-primary-light: var(--color-primary-light);
 
-$color-border-075: var(--color-border-075);
-$color-border-2: var(--color-border-2);
-$color-border-primary-2: var(--color-border-primary-2);
-$color-border-5: var(--color-border-5);
-$color-box-shadow-light: var(--color-box-shadow-light);
+$color-outer-1: var(--color-outer-1);
+$color-outer-3: var(--color-outer-3);
+$color-outer-i-05: var(--color-outer-i-05);
+$color-outer-i-1: var(--color-outer-i-1);
+
 
 
 html,
@@ -47,8 +46,8 @@ header {
     align-items: center;
     gap: 16px;
     padding: 0 32px;
-    border-bottom: 1px solid $color-border-075;
-    box-shadow: 0 1px 5px 0 $color-box-shadow-light;
+    border-bottom: 1px solid $color-outer-i-1;
+    box-shadow: 0px 1px 3px 0 $color-outer-i-05;
     z-index: 1;
 
     a {
@@ -76,10 +75,10 @@ h2 {
 }
 
 .search-container {
-    background-color: #404040;
+    background-color: $color-primary-light;
     display: flex;
     align-items: center;
-    border: 1px solid $color-border-075;
+    border: 1px solid $color-outer-i-05;
     border-radius: 8px;
 
     button {
@@ -95,7 +94,7 @@ h2 {
 }
 
 .search-input {
-    background-color: #404040;
+    background-color: $color-primary-light;
     border: none;
     padding: 4px 8px;
     border-radius: 8px;
@@ -103,7 +102,7 @@ h2 {
     color: #efefef;
 
     &::placeholder {
-        color: #a6a6a6;
+        color: $color-font-placeholder;
     }
 
     &:focus {
@@ -118,7 +117,7 @@ h2 {
     left: 50%;
     display: flex;
     padding: 8px 32px;
-    border: 1px solid $color-border-5;
+    border: 1px solid $color-outer-i-05;
     border-radius: 8px;
     color: $color-background;
     transform: scale(0) translateX(-33.3%);
@@ -137,14 +136,14 @@ h2 {
 .label {
     width: 50px;
     height: 26px;
-    background-color: #404040;
+    background-color: $color-primary-light;
     display: flex;
     border-radius: 50px;
     align-items: center;
     justify-content: space-between;
     margin-right: 5px;
     padding: 5px;
-    border: 1px solid $color-border-075;
+    border: 1px solid $color-outer-i-1;
     position: relative;
     transform: scale(1.25);
 
@@ -158,7 +157,7 @@ h2 {
 .ball {
     width: 20px;
     height: 20px;
-    background-color: #efefef;
+    background-color: $color-font;
     position: absolute;
     top: 2px;
     left: 2px;
@@ -169,6 +168,10 @@ h2 {
 /*  target the elemenent after the label*/
 .checkbox:checked+.label .ball {
     transform: translateX(24px);
+}
+
+#content {
+    width: 100%;
 }
 
 #all_pokemon {
@@ -184,18 +187,39 @@ h2 {
     background: url('./../img/bg.png') no-repeat 260% -30%;
     background-size: 120%;
     width: 300px;
-    // height: 250px;
     padding: 16px 8px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // border: 1px solid $color-border-5;
     border-radius: 16px 40px 16px 40px;
+    color: $color-font;
     cursor: pointer;
+    box-shadow: 2px 0 2px 0 $color-outer-i-1;
     transition: transform 225ms ease-in-out;
 
     &:hover {
         transform: scale(1.05);
+    }
+
+    img {
+        width: 105px;
+        height: 105px;
+
+        &:hover {
+            width: 125px;
+            height: 125px;
+            animation: rotatePokemonRight 225ms ease-in-out;
+        }
+    }
+}
+
+@keyframes rotatePokemonRight {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg)
     }
 }
 
@@ -203,19 +227,40 @@ h2 {
     background: url('./../img/bg.png') no-repeat -150% 110%;
     background-size: 120%;
     width: 300px;
-    // height: 250px;
     padding: 16px 8px 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    // border: 1px solid $color-border-5;
     border-radius: 40px 16px 40px 16px;
+    color: $color-font;
     cursor: pointer;
+    box-shadow: 2px 0 2px 0 $color-outer-i-1;
     transition: transform 125ms ease-in-out;
 
     &:hover {
         transform: scale(1.05);
 
+    }
+
+    img {
+        width: 105px;
+        height: 105px;
+
+        &:hover {
+            width: 125px;
+            height: 125px;
+            animation: rotatePokemonLeft 225ms ease-in-out;
+        }
+    }
+}
+
+@keyframes rotatePokemonLeft {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-360deg)
     }
 }
 
@@ -225,39 +270,17 @@ h2 {
     justify-content: space-evenly;
     align-items: center;
     gap: 16px;
-    // margin: 16px 0;
-}
 
-.image {
-    background-color: $color-primary;
-    width: 150px;
-    height: 150px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 16px;
-    border-radius: 50%;
-    box-shadow: 2px -1px 2px 2px $color-border-2;
-
-    img {
-        width: 105px;
-        height: 105px;
-
-        &:hover {
-            width: 125px;
-            height: 125px;
-            animation: rotatePokemon 225ms ease-in-out;
-        }
-    }
-}
-
-@keyframes rotatePokemon {
-    from {
-        transform: rotate(0deg);
-    }
-
-    to {
-        transform: rotate(360deg)
+    .image {
+        background-color: $color-primary;
+        width: 150px;
+        height: 150px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 16px;
+        border-radius: 50%;
+        box-shadow: 2px 0 2px 0 $color-outer-3;
     }
 }
 
@@ -268,42 +291,48 @@ h2 {
 }
 
 .type {
-    background-color: rgba(255, 255, 255, 0.4);
     padding: 4px 8px;
-    // border: 2px solid $color-border-5;
     border-radius: 8px;
-    color: #404040;
-    font-weight: bold;
+    color: $color-font;
+    // font-weight: bold;
     text-align: center;
 }
 
 .normal {
     background-color: #adac7e !important;
+    border: 2px solid #474734;
 }
 
 .fire {
     background-color: #f08639 !important;
+    border: 2px solid #8A4D21;
 }
 
 .water {
     background-color: #769af1 !important;
+    border: 2px solid #455A8C;
 }
 
 .grass {
     background-color: #7dca57 !important;
-    border: 2px solid #5ca145;
+    border: 2px solid #39632B;
 }
 
 .electric {
     background-color: #f8d135 !important;
+    border: 2px solid #917A1F;
+    color: #172333;
 }
 
 .ice {
     background-color: #a1dbdc !important;
+    border: 2px solid #567575;
+    color: #172333;
 }
 
 .fighting {
     background-color: #cc352c !important;
+    border: 2px solid #661A16;
 }
 
 .poison {
@@ -313,117 +342,55 @@ h2 {
 
 .ground {
     background-color: #e2c370 !important;
+    border: 2px solid #7D6C3E;
+    color: #172333;
 }
 
 .flying {
     background-color: #ab94f0 !important;
+    border: 2px solid #62558A;
 }
 
 .psychic {
     background-color: #f96491 !important;
+    border: 2px solid #943B56;
 }
 
 .bug {
     background-color: #adbc21 !important;
+    border: 2px solid #505710;
+    color: #172333;
 }
 
 .rock {
     background-color: #bfa73d !important;
+    border: 2px solid #594E1D;
 }
 
 .ghost {
     background-color: #755b9c !important;
+    border: 2px solid #281F36;
 }
 
 .dark {
     background-color: #755b4c !important;
+    border: 2px solid #0F0C0A;
 }
 
 .dragon {
     background-color: #753ff8 !important;
+    border: 2px solid #452491;
 }
 
 .steel {
     background-color: #bebfd4 !important;
+    border: 2px solid #63636E;
+    color: #172333;
 }
 
 .fairy {
     background-color: #fe86e9 !important;
-}
-
-.normal-light {
-    background-color: rgba(173, 172, 126, 0.7) !important;
-}
-
-.fire-light {
-    background-color: rgba(240, 134, 57, 0.7) !important;
-}
-
-.water-light {
-    background-color: rgba(118, 154, 241, 0.7) !important;
-}
-
-.grass-light {
-    background-color: rgba(125, 202, 87, 0.7) !important;
-    border: 2px solid #5ca145;
-}
-
-.electric-light {
-    background-color: rgba(248, 209, 53, 0.7) !important;
-}
-
-.ice-light {
-    background-color: rgba(161, 219, 220, 0.7) !important;
-}
-
-.fighting-light {
-    background-color: rgba(204, 53, 44), 0.7 !important;
-}
-
-.poison-light {
-    background-color: rgba(168, 66, 166, 1) !important;
-    border: 2px solid #B547B3;
-    color: #dddddd;
-}
-
-.ground-light {
-    background-color: rgba(226, 195, 112, 0.7) !important;
-}
-
-.flying-light {
-    background-color: rgba(171, 148, 240, 0.7) !important;
-}
-
-.psychic-light {
-    background-color: rgb(249, 100, 145, 0.7) !important;
-}
-
-.bug-light {
-    background-color: rgba(173, 188, 33, 0.7) !important;
-}
-
-.rock-light {
-    background-color: rgb(191, 167, 61, 0.7) !important;
-}
-
-.ghost-light {
-    background-color: rgba(117, 91, 156, 0.7) !important;
-}
-
-.dark-light {
-    background-color: rgba(117, 91, 76, 0.7) !important;
-}
-
-.dragon-light {
-    background-color: rgba(117, 63, 248, 0.7) !important;
-}
-
-.steel-light {
-    background-color: rgba(190, 191, 212, 0.7) !important;
-}
-
-.fairy-light {
-    background-color: rgba(254, 134, 233, 0.7) !important;
+    border: 2px solid #99518D;
 }
 
 .content-overlay {
@@ -463,9 +430,8 @@ h2 {
     flex-direction: column;
     align-items: center;
     padding: 16px 0 0 0;
-    border: 2px solid #5ca145;
     border-radius: 16px 40px;
-    box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 0 4px 0 $color-outer-3;
 }
 
 .pokemon-details-top,
@@ -495,5 +461,5 @@ h2 {
     position: absolute;
     border: 6px solid #5CA145;
     border-radius: 50%;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 0 4px 0 $color-outer-3;
 }

@@ -1,14 +1,11 @@
 body[data-theme='light-theme'] {
-    --color-background: #d9d9d9;
-    --color-font: #0d0d0d;
-    --color-primary: #a6a6a6;
-    --color-secondary: #737373;
-    --color-middle: #404040;
-    --color-light: #202020;
+    --color-background: #efefef;
+    --color-font: #06090d;
+    --color-font-placeholder: rgba(6, 9, 13, 0.5);
+    --color-primary: #BDBDBD;
+    --color-primary-light: #8A8A8A;
 
-    --color-border-075: rgba(0, 0, 0, 0.075);
-    --color-border-2: rgba(0, 0, 0, 0.2);
-    --color-border-primary-2: rgba(18, 27, 38, 0.2);
-    --color-border-5: rgba(0, 0, 0, 0.5);
-    --color-box-shadow-light: rgba(0, 0, 0, 0.05);
+    --color-outer-3: rgba(255, 255, 255, 0.3);
+    --color-outer-i-05: rgba(0, 0, 0, 0.05);
+    --color-outer-i-1: rgba(0, 0, 0, 0.1);
 }
