@@ -74,9 +74,9 @@ function renderAllPokemon() {
  */
 function pokemonContainerTemplate(pokemonIndex, type0) {
     return /*html*/`
-             <div id="pokemon_${pokemonIndex}" class="one-pokemon ${type0}">
-                 
-             </div>
+        <div id="pokemon_${pokemonIndex}" onclick="showPokemonDetails(${pokemonIndex})" class="one-pokemon ${type0}">
+            
+        </div>
     `;
 }
 
@@ -341,4 +341,45 @@ function renderSearchedPokemonSecondType(pokemonIndex) {
         let pokemonType1 = searchedPokemon[pokemonIndex]['types'][1]['type']['name'];
         pokemonTypeContainer.innerHTML += pokemonSecondTypeTemplate(pokemonType1);
     }
+}
+
+
+function showPokemonDetails(pokemonIndex) {
+    let htmlBody = document.body;
+    htmlBody.style.overflowY = 'hidden';
+    let contentContainer = document.getElementById('content');
+    contentContainer.classList.add('content-overlay');
+    let pokemonOverlay = document.getElementById('pokemon_overlay');
+    pokemonOverlay.classList.remove('display-none');
+    renderPokemonDetails(pokemonIndex);
+}
+
+
+function hidePokemonDetails() {
+    let htmlBody = document.body;
+    htmlBody.style.overflowY = 'scroll';
+    let contentContainer = document.getElementById('content');
+    contentContainer.classList.remove('content-overlay');
+    let pokemonOverlay = document.getElementById('pokemon_overlay');
+    pokemonOverlay.classList.add('display-none');
+}
+
+
+function renderPokemonDetails(pokemonIndex) {
+    let pokemonOverlay = document.getElementById('pokemon_overlay');
+    console.log(loadedPokemon);
+    let pokemonType0 = loadedPokemon[pokemonIndex]['types'][0]['type']['name'];
+    pokemonOverlay.innerHTML = /*html*/`
+        <div class="pokemon-details ${pokemonType0}">
+            <div class="pokemon-details-top">
+                Hallo
+            </div>
+            
+            <div class="pokemon-details-bottom">
+                hallo Hallo
+            </div>
+            
+            <div class="circle"></div>
+        </div>
+    `;
 }

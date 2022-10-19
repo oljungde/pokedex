@@ -13,34 +13,39 @@
 </head>
 
 <body onload="init()">
-    <header>
-        <a href="./index.html">
-            <div class="logo">
-                <img src="./img/logo.png" alt="Logo">
-                <h1>Pokedex</h1>
+    <div id="pokemon_overlay" onclick="hidePokemonDetails()" class="pokemon-overlay display-none">
+    </div>
+
+    <div id="content">
+        <header>
+            <a href="./index.html">
+                <div class="logo">
+                    <img src="./img/logo.png" alt="Logo">
+                    <h1>Pokedex</h1>
+                </div>
+            </a>
+
+            <div class="search-container">
+                <input id="search" type="text" placeholder="search..." autocomplete="off" class="search-input">
+                <button id="search_btn" onclick="getSearchTerm()"><img src="./img/search.png" alt="search"></button>
             </div>
-        </a>
+            <div id="search_message" class="search-message">
+                Please enter at least three letters.
+            </div>
 
-        <div class="search-container">
-            <input id="search" type="text" placeholder="search..." autocomplete="off" class="search-input">
-            <button id="search_btn" onclick="getSearchTerm()"><img src="./img/search.png" alt="search"></button>
+            <div>
+                <input type="checkbox" class="checkbox" id="checkbox">
+                <label for="checkbox" class="label">
+                    <img src="./img/moon.png" alt="">
+                    <img src="./img/sun.png" alt="">
+                    <div class="ball">
+                </label>
+            </div>
+        </header>
+
+        <div id="all_pokemon">
+
         </div>
-        <div id="search_message" class="search-message">
-            Please enter at least three letters.
-        </div>
-
-        <div>
-            <input type="checkbox" class="checkbox" id="checkbox">
-            <label for="checkbox" class="label">
-                <img src="./img/moon.png" alt="">
-                <img src="./img/sun.png" alt="">
-                <div class="ball">
-            </label>
-        </div>
-    </header>
-
-    <div id="all_pokemon">
-
     </div>
 </body>
 
