@@ -10,3 +10,33 @@ body {
     --color-outer-i-05: rgba(255, 255, 255, 0.05);
     --color-outer-i-1: rgba(255, 255, 255, 0.1);
 }
+
+// https: //kevin-herbst.developerakademie.net/slackFragen/Pokemondex/index.html
+// evolution 
+
+//  if (evolutionChainInfo.chain.evolves_to[0].evolves_to[0].species.hasOwnProperty('name')) {
+//      let maxEvo=evolutionChainInfo.chain.evolves_to[0].evolves_to[0].species.name;
+//      console.log('Dritte Entwicklung', maxEvo);
+//  }
+
+//  else {
+//      console.log('Keine dritte Entwicklung');
+//  }
+
+//  if (evolutionChainInfo.chain.evolves_to[0].species.name) {
+//      let midEvo=evolutionChainInfo.chain.evolves_to[0].species.name;
+//      console.log('ChainJSONMidEvo', midEvo);
+//  }
+
+//  else {
+//      console.log('Keine Zweite entwicklung');
+//  }
+
+//  if (evolutionChainInfo.chain.species.name) {
+//      let minEvo=evolutionChainInfo.chain.species.name;
+//      console.log('ChainJSONMinEvo', minEvo);
+//  }
+
+//  else {
+//      console.log('Keine erste Entwicklung')
+//  }
