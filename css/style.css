@@ -408,7 +408,7 @@ h3 {
   display: none;
 }
 
-.pokemon-details {
+#pokemon_details {
   background: url("./../img/bg.png") no-repeat -10% -80%;
   background-size: 130%;
   width: 500px;
@@ -421,24 +421,24 @@ h3 {
   border-radius: 16px 40px;
   box-shadow: 2px 0 4px 0 var(--color-outer-3);
 }
-.pokemon-details h2 {
+#pokemon_details h2 {
   font-size: 32px;
 }
 
-.pokemon-details-top,
-.pokemone-details-bottom {
+#pokemon_details_top,
+#pokemone_details_bottom {
   display: flex;
   flex-direction: column;
 }
 
-.pokemon-details-top {
+#pokemon_details_top {
   width: 100%;
   height: 30%;
   display: flex;
   align-items: center;
 }
 
-.pokemon-details-bottom {
+#pokemon_details_bottom {
   background-color: var(--color-background);
   width: 100%;
   height: 70%;

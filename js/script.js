@@ -367,6 +367,11 @@ function renderSearchedPokemonSecondType(pokemonIndex) {
 }
 
 
+/**
+ * 
+ * @param {number} pokemonIndex is the index of the pokemon from array "loadedPokemon"
+ * function to show the pokemon card details
+ */
 function showPokemonDetails(pokemonIndex) {
     let htmlBody = document.body;
     htmlBody.style.overflowY = 'hidden';
@@ -378,6 +383,9 @@ function showPokemonDetails(pokemonIndex) {
 }
 
 
+/**
+ * function to close the pokemon details overlay
+ */
 function hidePokemonDetails() {
     let htmlBody = document.body;
     htmlBody.style.overflowY = 'scroll';
@@ -390,127 +398,212 @@ function hidePokemonDetails() {
 
 async function renderPokemonDetails(pokemonIndex) {
     let pokemonOverlay = document.getElementById('pokemon_overlay');
-
-
     let pokemonType0 = loadedPokemon[pokemonIndex]['types'][0]['type']['name'];
-    let pokemonType1 = loadedPokemon[pokemonIndex]['types'][1]['type']['name'];
+    pokemonOverlay.innerHTML = pokemonDetailsTemplate(pokemonType0);
+    renderPokemonDetailsName(pokemonIndex);
+    renderPokemonDetailsData(pokemonIndex);
+    renderPokemonDetailsBody(pokemonIndex);
+    renderPokemonDetailsImage(pokemonIndex, pokemonType0);
+    renderPokemonDetailsAbilities(pokemonIndex);
+    renderPokemonDetailsStats(pokemonIndex);
+    getPokemonEvolutionChain(pokemonIndex);
+}
 
 
+function pokemonDetailsTemplate(pokemonType0) {
+    return /*html*/`
+        <div id="pokemon_details" class="${pokemonType0}">
+            <div id="pokemon_details_top">
+
+            </div>
+
+            <div id="pokemon_details_bottom">
+
+            </div>
+
+        </div>
+    `;
+}
+
+
+function renderPokemonDetailsName(pokemonIndex) {
+    let pokemonDetailsTopContainer = document.getElementById('pokemon_details_top');
     let pokemonName = loadedPokemon[pokemonIndex]['name'];
     let pokemonFormattedName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
+    pokemonDetailsTopContainer.innerHTML += pokemonNameTemplate(pokemonFormattedName);
+}
 
 
+function renderPokemonDetailsData(pokemonIndex) {
+    let pokemonDetailsTopContainer = document.getElementById('pokemon_details_top');
+    let pokemonTypes = loadedPokemon[pokemonIndex]['types'];
+    let pokemonType0 = pokemonTypes[0]['type']['name'];
+    if (pokemonTypes.length > 1) {
+        let pokemonType1 = pokemonTypes[1]['type']['name'];
+        pokemonDetailsTopContainer.innerHTML += pokemonDetailsDataTwoTypesTemplate(pokemonType0, pokemonType1);
+    } else {
+        pokemonDetailsTopContainer.innerHTML += pokemonDetailsDataOneTypeTemplate(pokemonType0);
+    }
+}
+
+
+function pokemonDetailsDataTwoTypesTemplate(pokemonType0, pokemonType1) {
+    return /*html*/`
+        <div class="type-container-overlay">
+            <span class="type ${pokemonType0}">${pokemonType0}</span>
+            <span class="type ${pokemonType1}">${pokemonType1}</span> 
+        </div>
+    `;
+}
+
+
+function pokemonDetailsDataOneTypeTemplate(pokemonType0) {
+    return /*html*/`
+        <div class="type-container-overlay">
+            <span class="type ${pokemonType0}">${pokemonType0}</span>
+        </div>
+    `;
+}
+
+
+function renderPokemonDetailsBody(pokemonIndex) {
+    let pokemonDetailsTopContainer = document.getElementById('pokemon_details_top');
     let pokemonHeight = loadedPokemon[pokemonIndex]['height'];
     let pokemonSize = (+pokemonHeight / 10).toLocaleString();
     let pokemonWeight = loadedPokemon[pokemonIndex]['weight'];
     let pokemonKg = (+pokemonWeight / 10).toLocaleString();
+    pokemonDetailsTopContainer.innerHTML += pokemonDetailsBodyTemplate(pokemonSize, pokemonKg);
+}
 
 
+function pokemonDetailsBodyTemplate(pokemonSize, pokemonKg) {
+    return /*html*/`
+        <div class="weight-container-overlay">
+                <span><b>size:</b><br>${pokemonSize}m</span>
+                <span><b>weight:</b><br>${pokemonKg}kg</span>
+            </div> 
+        </div>
+    `;
+}
+
+
+function renderPokemonDetailsImage(pokemonIndex, pokemonType0) {
+    let pokemonDetailsContainer = document.getElementById('pokemon_details');
     let pokemonImage = loadedPokemon[pokemonIndex]['sprites']['other']['official-artwork']['front_default'];
+    pokemonDetailsContainer.innerHTML += pokemonDetailsImageTemplate(pokemonImage, pokemonType0);
+}
 
 
+function pokemonDetailsImageTemplate(pokemonImage, pokemonType0) {
+    return /*html*/`
+        <div class="circle" style="border: 6px solid ${pokemonOverlayBorder[0][pokemonType0]}">
+            <img src="${pokemonImage}" alt="">
+        </div>
+    `;
+}
+
+
+function renderPokemonDetailsAbilitiesContainer() {
+    let pokemonDetailsBottomContainer = document.getElementById('pokemon_details_bottom');
+    pokemonDetailsBottomContainer.innerHTML += pokemonDetailsAbilitiesContainerTemplate();
+}
+
+
+function pokemonDetailsAbilitiesContainerTemplate() {
+    return /*html*/`
+        <div id="pokemon_abilities">
+            <h3>Abilities:</h3>
+        </div>
+    `;
+}
+
+
+function renderPokemonDetailsAbilities(pokemonIndex) {
+    renderPokemonDetailsAbilitiesContainer();
+    let pokemonDetailsAbilitiesContainer = document.getElementById('pokemon_abilities');
     let pokemonAbilities = loadedPokemon[pokemonIndex]['abilities'];
+    for (let i = 0; i < pokemonAbilities.length; i++) {
+        const pokemonAbility = pokemonAbilities[i];
+        pokemonDetailsAbilitiesContainer.innerHTML += pokemonDetailsAbilityTemplate(pokemonAbility);
+    }
+}
 
 
+function pokemonDetailsAbilityTemplate(pokemonAbility) {
+    return /*html*/`
+            <span>${pokemonAbility['ability']['name']}</span><br>
+    `;
+}
+
+
+function renderPokemonDetailsStatsContainer() {
+    let pokemonDetailsBottomContainer = document.getElementById('pokemon_details_bottom');
+    pokemonDetailsBottomContainer.innerHTML += pokemonDetailsStatsContainerTemplate();
+}
+
+
+function pokemonDetailsStatsContainerTemplate() {
+    return /*html*/`
+        <div id="pokemon_stats" class="pokemon-abilities">
+            <h3>Stats:</h3>
+        </div>
+    `;
+}
+
+
+function renderPokemonDetailsStats(pokemonIndex) {
+    renderPokemonDetailsStatsContainer();
+    let pokemonDetailsStatsContainer = document.getElementById('pokemon_stats');
     let pokemonStats = loadedPokemon[pokemonIndex]['stats'];
+    for (let i = 0; i < pokemonStats.length; i++) {
+        const pokemonStat = pokemonStats[i];
+        pokemonDetailsStatsContainer.innerHTML += pokemonDetailsStatTemplate(pokemonStat);
+    }
+}
 
+
+function pokemonDetailsStatTemplate(pokemonStat) {
+    return /*html*/`
+        <span>${pokemonStat['stat']['name']}: ${pokemonStat['base_stat']}</span ><br>
+    `;
+}
+
+
+function renderPokemonDetailsEvolutionChainContainer() {
+    let pokemonDetailsBottomContainer = document.getElementById('pokemon_details_bottom');
+    pokemonDetailsBottomContainer.innerHTML += pokemonDetailsEvolutionChainContainerTemplate();
+}
+
+
+function pokemonDetailsEvolutionChainContainerTemplate() {
+    return /*html*/`
+        <div id="pokemon_evolution">
+            <h3>Evolution-Chain</h3>
+        </div>   
+    `;
+}
+
+
+async function getPokemonEvolutionChain(pokemonIndex) {
     let pokemonSpeciesUrl = loadedPokemon[pokemonIndex]['species']['url'];
     let pokemonSpecies = await fetch(pokemonSpeciesUrl);
     let pokemonSpeciesAsJson = await pokemonSpecies.json();
     let pokemonEvolutionChainUrl = pokemonSpeciesAsJson['evolution_chain']['url'];
     let pokemonEvolutionChain = await fetch(pokemonEvolutionChainUrl);
     let pokemonEvolutionChainAsJson = await pokemonEvolutionChain.json();
+    renderPokemonDetailsEvolutionChainContainer();
+    renderPokemonEvolutionChain(pokemonEvolutionChainAsJson);
+}
 
 
-
-    pokemonOverlay.innerHTML = /*html*/`
-        <div class="pokemon-details ${pokemonType0}">
-
-            <div class="pokemon-details-top">
-                <h2>${pokemonFormattedName}</h2>
-
-
-                <div id="pokemon_types_${pokemonIndex}" class="type-container-overlay">
-                    <span class="type ${pokemonType0}">${pokemonType0}</span>
-                    <span class="type ${pokemonType1}">${pokemonType1}</span> 
-                </div>
-
-
-                <div class="weight-container-overlay">
-                    <span><b>size:</b><br>${pokemonSize}m</span>
-                    <span><b>weight:</b><br>${pokemonKg}kg</span>
-                </div> 
-            </div>
-
-            
-            <div class="pokemon-details-bottom">
-                <div id="pokemon_abilities" class="pokemon-abilities">
-                    <h3>Abilities:</h3>
-                </div>
-
-
-                <div id="pokemon_stats" class="pokemon-abilities">
-                    <h3>Stats:</h3>
-                </div>
-
-
-                <div id="pokemon_evolution">
-                    <h3>Evolution-Chain</h3>
-                
-                </div>
-            </div>
-
-            
-            <div class="circle" style="border: 6px solid ${pokemonOverlayBorder[0][pokemonType0]}">
-            <img src="${pokemonImage}" alt="">
-            </div>
-        </div>
-    `;
-
-
-    for (let i = 0; i < pokemonAbilities.length; i++) {
-        const pokemonAbility = pokemonAbilities[i];
-        let abilttiesContainer = document.getElementById('pokemon_abilities');
-        abilttiesContainer.innerHTML += /*html*/`
-            <span>${pokemonAbility['ability']['name']}</span><br> 
-        `;
-    }
-
-
-    for (let j = 0; j < pokemonStats.length; j++) {
-        const pokemonStat = pokemonStats[j];
-        let statsContainer = document.getElementById('pokemon_stats');
-        statsContainer.innerHTML += /*html*/`
-            <span>${pokemonStat['stat']['name']}: ${pokemonStat['base_stat']}</span > <br>
-            `;
-
-
-    }
-
-
-    let pokemonEvolutionContainer = document.getElementById('pokemon_evolution')
-    // let pokemonEvolutionName1 = pokemonEvolutionChainAsJson['chain']['species']['name'];
-    // let pokemonEvolutionName2 = pokemonEvolutionChainAsJson['chain']['evolves_to'][0]['species']['name'];
-    // let pokemonEvolutionName3 = pokemonEvolutionChainAsJson['chain']['evolves_to'][0]['evolves_to'][0]['species'];['name'];
-
-
-    if (pokemonEvolutionChainAsJson['chain']['evolves_to'][0]['evolves_to'][0]['species']) {
-        let pokemonEvolutionName1 = pokemonEvolutionChainAsJson['chain']['species']['name'];
-        let pokemonEvolutionName2 = pokemonEvolutionChainAsJson['chain']['evolves_to'][0]['species']['name'];
-        let pokemonEvolutionName3 = pokemonEvolutionChainAsJson['chain']['evolves_to'][0]['evolves_to'][0]['species']['name'];
-        pokemonEvolutionContainer.innerHTML += `
-            <span>${pokemonEvolutionName1}</span>
-             <span>${pokemonEvolutionName2}</span>
-             <span>${pokemonEvolutionName3}</span>
-        `;
-    } else if (pokemonEvolutionChainAsJson['chain']['evolves_to'][0]['species']['name']) {
-        let pokemonEvolutionName1 = pokemonEvolutionChainAsJson['chain']['species']['name'];
-        let pokemonEvolutionName2 = pokemonEvolutionChainAsJson['chain']['evolves_to'][0]['species']['name'];
-        pokemonEvolutionContainer.innerHTML += `
-            <span>${pokemonEvolutionName1}</span>
-             <span>${pokemonEvolutionName2}</span>
-        `;
-    } else {
-        pokemonEvolutionContainer.innerHTML += 'Sorry! There ist no evolution-chain.'
+function renderPokemonEvolutionChain(pokemonEvolutionChainAsJson) {
+    let pokemonDetailsEvolutionChainContainer = document.getElementById('pokemon_evolution');
+    let pokemonEvolutionChain = pokemonEvolutionChainAsJson['chain']['evolves_to'];
+    if (pokemonEvolutionChain.length < 1) {
+        pokemonDetailsEvolutionChainContainer.innerHTML += `sorry`;
+    } else if (pokemonEvolutionChain[0]['evolves_to'].length == 0) {
+        pokemonDetailsEvolutionChainContainer.innerHTML += `zwei evos`;
+    } else if (pokemonEvolutionChain[0]['evolves_to'].length > 0) {
+        pokemonDetailsEvolutionChainContainer.innerHTML += `drei evos`;
     }
 }
