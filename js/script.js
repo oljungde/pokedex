@@ -418,6 +418,14 @@ function pokemonDetailsTemplate(pokemonType0) {
             </div>
 
             <div id="pokemon_details_bottom">
+                <div class="details-switch">
+                    <span style="border-bottom: 5px solid ${pokemonOverlayBorder[0][pokemonType0]}">
+                        <h3>Stats</h3>
+                    </span>
+                    <span>
+                        <h3>Moves</h3>
+                    </span>              
+                </div>
 
             </div>
 
@@ -579,6 +587,9 @@ function pokemonDetailsEvolutionChainContainerTemplate() {
     return /*html*/`
         <div id="pokemon_evolution">
             <h3>Evolution-Chain</h3>
+            <div id="evolution_steps">
+            
+            </div>
         </div>   
     `;
 }
@@ -592,18 +603,86 @@ async function getPokemonEvolutionChain(pokemonIndex) {
     let pokemonEvolutionChain = await fetch(pokemonEvolutionChainUrl);
     let pokemonEvolutionChainAsJson = await pokemonEvolutionChain.json();
     renderPokemonDetailsEvolutionChainContainer();
-    renderPokemonEvolutionChain(pokemonEvolutionChainAsJson);
+    renderPokemonDetailsEvolutionChain(pokemonEvolutionChainAsJson);
 }
 
 
-function renderPokemonEvolutionChain(pokemonEvolutionChainAsJson) {
-    let pokemonDetailsEvolutionChainContainer = document.getElementById('pokemon_evolution');
+function renderPokemonDetailsEvolutionChain(pokemonEvolutionChainAsJson) {
+    let pokemonEvolutionSteps = document.getElementById('evolution_steps');
     let pokemonEvolutionChain = pokemonEvolutionChainAsJson['chain']['evolves_to'];
     if (pokemonEvolutionChain.length < 1) {
-        pokemonDetailsEvolutionChainContainer.innerHTML += `sorry`;
+        pokemonEvolutionSteps.innerHTML += pokemonDetailsNoEvolutionChainTemplate();
     } else if (pokemonEvolutionChain[0]['evolves_to'].length == 0) {
-        pokemonDetailsEvolutionChainContainer.innerHTML += `zwei evos`;
+        renderFirstEvolutionStep(pokemonEvolutionChainAsJson);
+        renderSecondEvolutionStep(pokemonEvolutionChainAsJson);
     } else if (pokemonEvolutionChain[0]['evolves_to'].length > 0) {
-        pokemonDetailsEvolutionChainContainer.innerHTML += `drei evos`;
+        renderFirstEvolutionStep(pokemonEvolutionChainAsJson);
+        renderSecondEvolutionStep(pokemonEvolutionChainAsJson);
+        renderThirdEvolutionStep(pokemonEvolutionChainAsJson);
     }
+}
+
+
+function pokemonDetailsNoEvolutionChainTemplate() {
+    return /*html*/`
+        <span>Sorry, there is no evolution chain.</span>
+    `;
+}
+
+
+function renderFirstEvolutionStep(pokemonEvolutionChainAsJson) {
+    let pokemonEvolutionSteps = document.getElementById('evolution_steps');
+    let firstEvolutionStepName = pokemonEvolutionChainAsJson['chain']['species']['name'];
+    let firstEvolutionStepNameFormatted = firstEvolutionStepName.charAt(0).toUpperCase() + firstEvolutionStepName.slice(1);
+    for (let i = 0; i < loadedPokemon.length; i++) {
+        const firstEvolutionPokemon = loadedPokemon[i];
+        let firstEvolutionPokemonName = firstEvolutionPokemon['name'];
+        let firstEvolutionPokemonNameFormatted = firstEvolutionPokemonName.charAt(0).toUpperCase() + firstEvolutionPokemonName.slice(1)
+        let firstEvolutionPokemonImage = loadedPokemon[i]['sprites']['other']['official-artwork']['front_default'];
+        if (firstEvolutionStepNameFormatted == firstEvolutionPokemonNameFormatted) {
+            pokemonEvolutionSteps.innerHTML += evolutionStepTemplate(firstEvolutionStepNameFormatted, firstEvolutionPokemonImage);
+        }
+    }
+}
+
+
+function renderSecondEvolutionStep(pokemonEvolutionChainAsJson) {
+    let pokemonEvolutionSteps = document.getElementById('evolution_steps');
+    let secondEvolutionStepName = pokemonEvolutionChainAsJson['chain']['evolves_to'][0]['species']['name'];
+    let secondEvolutionStepNameFormatted = secondEvolutionStepName.charAt(0).toUpperCase() + secondEvolutionStepName.slice(1);
+    for (let i = 0; i < loadedPokemon.length; i++) {
+        const secondEvolutionPokemon = loadedPokemon[i];
+        let secondEvolutionPokemonName = secondEvolutionPokemon['name'];
+        let secondEvolutionPokemonNameFormatted = secondEvolutionPokemonName.charAt(0).toUpperCase() + secondEvolutionPokemonName.slice(1)
+        let secondEvolutionPokemonImage = loadedPokemon[i]['sprites']['other']['official-artwork']['front_default'];
+        if (secondEvolutionStepNameFormatted == secondEvolutionPokemonNameFormatted) {
+            pokemonEvolutionSteps.innerHTML += evolutionStepTemplate(secondEvolutionStepNameFormatted, secondEvolutionPokemonImage);
+        }
+    }
+}
+
+
+function renderThirdEvolutionStep(pokemonEvolutionChainAsJson) {
+    let pokemonEvolutionSteps = document.getElementById('evolution_steps');
+    let thirdEvolutionStepName = pokemonEvolutionChainAsJson['chain']['evolves_to'][0]['evolves_to'][0]['species']['name'];
+    let thirdEvolutionStepNameFormatted = thirdEvolutionStepName.charAt(0).toUpperCase() + thirdEvolutionStepName.slice(1);
+    for (let i = 0; i < loadedPokemon.length; i++) {
+        const thirdEvolutionPokemon = loadedPokemon[i];
+        let thirdEvolutionPokemonName = thirdEvolutionPokemon['name'];
+        let thirdEvolutionPokemonNameFormatted = thirdEvolutionPokemonName.charAt(0).toUpperCase() + thirdEvolutionPokemonName.slice(1)
+        let thirdEvolutionPokemonImage = loadedPokemon[i]['sprites']['other']['official-artwork']['front_default'];
+        if (thirdEvolutionStepNameFormatted == thirdEvolutionPokemonNameFormatted) {
+            pokemonEvolutionSteps.innerHTML += evolutionStepTemplate(thirdEvolutionStepNameFormatted, thirdEvolutionPokemonImage);
+        }
+    }
+}
+
+
+function evolutionStepTemplate(evolutionStepName, evolutionStepImage) {
+    return /*html*/ `
+        <div class="evolution-step">
+            <img src="${evolutionStepImage}" alt="" class="evo-image">
+            ${evolutionStepName}
+        </div>
+    `;
 }

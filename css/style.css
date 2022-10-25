@@ -492,3 +492,44 @@ h3 {
   text-align: center;
   color: var(--color-primary);
 }
+
+.details-switch {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+  padding: 8px 32px;
+}
+.details-switch span {
+  padding-bottom: 4px;
+}
+
+.active {
+  border-bottom: 5px solid white;
+}
+
+#pokemon_abilities,
+#pokemon_stats,
+#pokemon_evolution {
+  margin-bottom: 24px;
+}
+#pokemon_abilities h3,
+#pokemon_stats h3,
+#pokemon_evolution h3 {
+  margin-bottom: 4px;
+}
+
+#evolution_steps {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 16px;
+}
+
+.evolution-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.evolution-step img {
+  width: 125px;
+  height: 125px;
+}
