@@ -438,6 +438,11 @@ function showPokemonDetails(pokemonIndex) {
 }
 
 
+function propagation(event) {
+    event.stopPropagation();
+}
+
+
 /**
  * function to close the pokemon details overlay
  */
@@ -467,7 +472,8 @@ async function renderPokemonDetails(pokemonIndex) {
 
 function pokemonDetailsTemplate(pokemonType0) {
     return /*html*/`
-        <div id="pokemon_details" class="${pokemonType0}">
+        <div id="pokemon_details" onclick="propagation(event)" class="${pokemonType0}">
+            <button onclick="hidePokemonDetails()" class="close-btn"><img src="./img/close.png" alt="Close Button"></button>
             <div id="pokemon_details_top">
 
             </div>
