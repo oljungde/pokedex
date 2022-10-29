@@ -467,6 +467,7 @@ async function renderPokemonDetails(pokemonIndex) {
     renderPokemonDetailsAbilities(pokemonIndex);
     renderPokemonDetailsStats(pokemonIndex);
     getPokemonEvolutionChain(pokemonIndex);
+    renderPokemonMoves(pokemonIndex);
 }
 
 
@@ -483,12 +484,22 @@ function pokemonDetailsTemplate(pokemonType0) {
                     <span style="border-bottom: 5px solid ${pokemonOverlayBorder[0][pokemonType0]}">
                         <h3>Stats</h3>
                     </span>
-                    <span>
+                    <span onclick="switchToMoves()">
                         <h3>Moves</h3>
-                    </span>              
-                </div>
+                    </span>          
+                </div>        
             </div>
 
+            <div id="pokemon_details_moves" class="display-none">
+                <div class="details-switch">
+                    <span onclick="switchToStats()">
+                        <h3>Stats</h3>
+                    </span>
+                    <span style="border-bottom: 5px solid ${pokemonOverlayBorder[0][pokemonType0]}">
+                        <h3>Moves</h3>
+                    </span>          
+                </div>        
+            </div>
         </div>
     `;
 }
@@ -762,5 +773,54 @@ function evolutionStepTemplate(evolutionStepName, evolutionStepImage) {
             <img src="${evolutionStepImage}" alt="" class="evo-image">
             ${evolutionStepName}
         </div>
+    `;
+}
+
+
+function switchToMoves(pokemonIndex) {
+    let pokemonStatsContainer = document.getElementById('pokemon_details_bottom');
+    let pokemonMovesContainer = document.getElementById('pokemon_details_moves')
+    pokemonStatsContainer.classList.add('display-none');
+    pokemonMovesContainer.classList.remove('display-none');
+}
+
+
+function switchToStats() {
+    let pokemonStatsContainer = document.getElementById('pokemon_details_bottom');
+    let pokemonMovesContainer = document.getElementById('pokemon_details_moves')
+    pokemonStatsContainer.classList.remove('display-none');
+    pokemonMovesContainer.classList.add('display-none');
+}
+
+
+function renderPokemonMovesContainer() {
+    let pokemonMovesContainer = document.getElementById('pokemon_details_moves');
+    pokemonMovesContainer.innerHTML += pokemonMovesContainerTemplate();
+}
+
+
+function pokemonMovesContainerTemplate() {
+    return /*html*/`
+        <div id="pokemon_moves" class="pokemon-abilities">
+            <h3>Moves:</h3><br>
+        </div>
+    `;
+}
+
+
+function renderPokemonMoves(pokemonIndex) {
+    renderPokemonMovesContainer();
+    let pokemonMovesContainer = document.getElementById('pokemon_moves')
+    let pokemonMoves = loadedPokemon[pokemonIndex]['moves'];
+    for (let i = 0; i < pokemonMoves.length; i++) {
+        const pokemonMove = pokemonMoves[i]['move']['name'];
+        pokemonMovesContainer.innerHTML += pokemonMoveTemplate(pokemonMove);
+    }
+}
+
+
+function pokemonMoveTemplate(pokemonMove) {
+    return /*html*/`
+        <div class="pokemon-move">${pokemonMove}</div> 
     `;
 }
