@@ -1,0 +1,13 @@
+@use 'default-theme';
+@use 'light-theme';
+
+$color-background: var(--color-background);
+$color-font: var(--color-font);
+$color-font-placeholder: var(--color-font-placeholder);
+$color-primary: var(--color-primary);
+$color-primary-light: var(--color-primary-light);
+
+$color-outer-1: var(--color-outer-1);
+$color-outer-3: var(--color-outer-3);
+$color-outer-i-05: var(--color-outer-i-05);
+$color-outer-i-1: var(--color-outer-i-1);
