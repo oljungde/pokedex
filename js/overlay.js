@@ -192,6 +192,15 @@ function renderPokemonDetailsBody(pokemonIndex) {
 function renderPokemonDetailsImage(pokemonIndex, pokemonType0) {
     let pokemonDetailsContainer = document.getElementById('pokemon_details');
     let pokemonImage = loadedPokemon[pokemonIndex]['sprites']['other']['official-artwork']['front_default'];
+    if (pokemonImage == null) {
+        pokemonImage = loadedPokemon[pokemonIndex]['sprites']['front_default'];
+        if (pokemonImage == null) {
+            pokemonImage = loadedPokemon[pokemonIndex]['sprites']['other']['home']['front_default'];
+            if (pokemonImage == null) {
+                pokemonImage = `./img/no-image.png`;
+            }
+        }
+    }
     pokemonDetailsContainer.innerHTML += pokemonDetailsImageTemplate(pokemonImage, pokemonType0);
 }
 

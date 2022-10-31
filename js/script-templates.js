@@ -17,7 +17,7 @@ function pokemonContainerTemplate(pokemonIndex, type0) {
  * @returns the html code to render the name of a pokemon
  */
 function pokemonNameTemplate(pokemonName) {
-    return `
+    return /*html*/`
         <h2>${pokemonName}</h2>   
     `;
 }
@@ -25,15 +25,14 @@ function pokemonNameTemplate(pokemonName) {
 
 /**
  * @param {number} pokemonIndex is the index of the pokemon from array "loadedPokemon"
- * @param {string} pokemonImage is the url to load the image from the pokemon
  * @param {string} pokemonType0 is the type of the pokemon, e.g. grass
  * @returns the html code to render the name and type of a pokemon
  */
-function pokemonDataTemplate(pokemonIndex, pokemonImage, pokemonType0) {
-    return `
+function pokemonDataTemplate(pokemonIndex, pokemonType0) {
+    return /*html*/`
         <div class="pokemon-content">
-            <div class="image">
-                <img src="${pokemonImage}">
+            <div id="pokemon_image_${pokemonIndex}" class="image">
+                
             </div>
             <div id="pokemon_types_${pokemonIndex}" class="type-container">
                 <span class="type ${pokemonType0}">${pokemonType0}</span>
@@ -48,8 +47,20 @@ function pokemonDataTemplate(pokemonIndex, pokemonImage, pokemonType0) {
  * @returns the html code to render the second type of a pokemon
  */
 function pokemonSecondTypeTemplate(pokemonType1) {
-    return `
+    return /*html*/`
        <span class="type ${pokemonType1}">${pokemonType1}</span> 
+    `;
+}
+
+
+/**
+ * 
+ * @param {string} pokemonImage ist the url of pokemon image
+ * @returns the html code to render the pokemon image
+ */
+function pokemonImageTemplate(pokemonImage) {
+    return /*html*/`
+        <img src="${pokemonImage}">
     `;
 }
 
@@ -58,7 +69,7 @@ function pokemonSecondTypeTemplate(pokemonType1) {
  * @returns the html code if no pokemon was found
  */
 function noPokemonFoundTemplate() {
-    return `
+    return /*html*/`
         <h2>Sorry! No pokemon found!</h2>
     `;
 }

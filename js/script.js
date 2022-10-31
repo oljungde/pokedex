@@ -59,8 +59,9 @@ function renderAllPokemon() {
         let pokemonType0 = pokemon['types'][0]['type']['name'];
         allPokemonContainer.innerHTML += pokemonContainerTemplate(i, pokemonType0);
         renderPokemonName(i);
-        renderPokemonData(i);
+        renderPokemonFirstType(i);
         renderPokemonSecondType(i);
+        renderPokemonImage(i);
         currentPokemon = i + 1;
     }
 }
@@ -79,14 +80,13 @@ function renderPokemonName(pokemonIndex) {
 
 
 /**
- * render the main type (pokemonType0) an image of the pokemon
+ * render the main type (pokemonType0) of the pokemon
  * @param {number} pokemonIndex is the index of the pokemon from array "loadedPokemon"
  */
-function renderPokemonData(pokemonIndex) {
+function renderPokemonFirstType(pokemonIndex) {
     let pokemonContainer = document.getElementById(`pokemon_${pokemonIndex}`);
-    let pokemonImage = loadedPokemon[pokemonIndex]['sprites']['other']['official-artwork']['front_default'];
     let pokemonType0 = loadedPokemon[pokemonIndex]['types'][0]['type']['name'];
-    pokemonContainer.innerHTML += pokemonDataTemplate(pokemonIndex, pokemonImage, pokemonType0);
+    pokemonContainer.innerHTML += pokemonDataTemplate(pokemonIndex, pokemonType0);
 }
 
 
@@ -101,6 +101,26 @@ function renderPokemonSecondType(pokemonIndex) {
         let pokemonType1 = loadedPokemon[pokemonIndex]['types'][1]['type']['name'];
         pokemonTypeContainer.innerHTML += pokemonSecondTypeTemplate(pokemonType1);
     }
+}
+
+
+/**
+ * render the image of pokemon
+ * @param {number} pokemonIndex is the index of pokemon in the array loaded pokemon
+ */
+function renderPokemonImage(pokemonIndex) {
+    let pokemonImageContainer = document.getElementById(`pokemon_image_${pokemonIndex}`)
+    let pokemonImage = loadedPokemon[pokemonIndex]['sprites']['other']['official-artwork']['front_default'];
+    if (pokemonImage == null) {
+        pokemonImage = loadedPokemon[pokemonIndex]['sprites']['front_default'];
+        if (pokemonImage == null) {
+            pokemonImage = loadedPokemon[pokemonIndex]['sprites']['other']['home']['front_default'];
+            if (pokemonImage == null) {
+                pokemonImage = `./img/no-image.png`;
+            }
+        }
+    }
+    pokemonImageContainer.innerHTML += pokemonImageTemplate(pokemonImage);
 }
 
 
@@ -211,60 +231,8 @@ function pokemonSearch() {
     if (searchedPokemon.length == 0) {
         pokemonContainer.innerHTML = noPokemonFoundTemplate();
     } else {
-        renderSearchedPokemon();
-    }
-}
-
-
-/**
- * render the search result
- */
-function renderSearchedPokemon() {
-    let pokemonContainer = document.getElementById('all_pokemon');
-    for (let i = 0; i < searchedPokemon.length; i++) {
-        const pokemon = searchedPokemon[i];
-        let pokemonType0 = pokemon['types'][0]['type']['name'];
-        pokemonContainer.innerHTML += pokemonContainerTemplate(i, pokemonType0);
-        renderSearchedPokemonName(i);
-        renderSearchedPokemonData(i);
-        renderSearchedPokemonSecondType(i);
-    }
-}
-
-
-/**
- *  * render the names of found pokemon
- * @param {number} pokemonIndex is the index of the pokemon from array "searchedPokemon"
- */
-function renderSearchedPokemonName(pokemonIndex) {
-    let pokemonContainer = document.getElementById(`pokemon_${pokemonIndex}`);
-    let pokemonName = searchedPokemon[pokemonIndex]['name'];
-    let pokemonFormattedName = pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1);
-    pokemonContainer.innerHTML += pokemonNameTemplate(pokemonFormattedName);
-}
-
-
-/**
- * render the image and type of found pokemon
- * @param {number} pokemonIndex is the index of the pokemon from array "loadedPokemon"
- */
-function renderSearchedPokemonData(pokemonIndex) {
-    let pokemonContainer = document.getElementById(`pokemon_${pokemonIndex}`);
-    let pokemonImage = searchedPokemon[pokemonIndex]['sprites']['other']['official-artwork']['front_default'];
-    let pokemonType0 = searchedPokemon[pokemonIndex]['types'][0]['type']['name'];
-    pokemonContainer.innerHTML += pokemonDataTemplate(pokemonIndex, pokemonImage, pokemonType0);
-}
-
-
-/**
- * render the second type of the pokemon
- * @param {number} pokemonIndex is the index of the pokemon from array "loadedPokemon"
- */
-function renderSearchedPokemonSecondType(pokemonIndex) {
-    let pokemonTypeContainer = document.getElementById(`pokemon_types_${pokemonIndex}`);
-    let pokemonTypes = searchedPokemon[pokemonIndex]['types'];
-    if (pokemonTypes.length > 1) {
-        let pokemonType1 = searchedPokemon[pokemonIndex]['types'][1]['type']['name'];
-        pokemonTypeContainer.innerHTML += pokemonSecondTypeTemplate(pokemonType1);
+        loadedPokemon = searchedPokemon;
+        currentPokemon = 0;
+        renderAllPokemon();
     }
 }
