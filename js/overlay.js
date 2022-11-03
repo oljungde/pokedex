@@ -133,6 +133,7 @@ async function renderPokemonDetails(pokemonIndex) {
     renderPokemonDetailsName(pokemonIndex);
     renderPokemonDetailsData(pokemonIndex);
     renderPokemonDetailsBody(pokemonIndex);
+    renderPokemonDetailsNavigation(pokemonIndex);
     renderPokemonDetailsImage(pokemonIndex, pokemonType0);
     renderPokemonDetailsAbilities(pokemonIndex);
     renderPokemonDetailsStats(pokemonIndex);
@@ -181,6 +182,77 @@ function renderPokemonDetailsBody(pokemonIndex) {
     let pokemonWeight = loadedPokemon[pokemonIndex]['weight'];
     let pokemonKg = (+pokemonWeight / 10).toLocaleString();
     pokemonDetailsTopContainer.innerHTML += pokemonDetailsBodyTemplate(pokemonSize, pokemonKg);
+}
+
+
+/**
+ * renders the navigation arrows in pokemon details card
+ * @param {number} pokemonIndex of Array loadedPokemon
+ */
+function renderPokemonDetailsNavigation(pokemonIndex) {
+    let pokemonDetailsTopContainer = document.getElementById('pokemon_details_top');
+    pokemonDetailsTopContainer.innerHTML += pokemonDetailsNavigationTemplate(pokemonIndex);
+    pokemonDetailsNavigationBlendOff(pokemonIndex);
+}
+
+
+/**
+ * blend off the forward button if it is the last pokemon, and blend off the bachward button if it is the first pokemon
+ * @param {number} pokemonIndex of array loadedPokemon
+ */
+function pokemonDetailsNavigationBlendOff(pokemonIndex) {
+    if (pokemonIndex == 0) {
+        let pokemonDetailsNavigation = document.getElementById('navigation_overlay');
+        let backwardButton = document.getElementById('backward');
+        backwardButton.classList.add('display-none');
+        pokemonDetailsNavigation.classList.add('justify-end');
+    }
+    if (pokemonIndex == numberOfAllPokemon - 1) {
+        let pokemonDetailsNavigation = document.getElementById('navigation_overlay');
+        let forwardButton = document.getElementById('forward');
+        forwardButton.classList.add('display-none');
+        pokemonDetailsNavigation.classList.add('justify-start');
+    }
+}
+
+
+/**
+ * load the next pokemon details card
+ * @param {number} pokemonIndex of the array loadedPokemon
+ */
+async function forward(pokemonIndex) {
+    if (pokemonIndex == loadedPokemon.length - 1 && loadedPokemon.length < numberOfAllPokemon) {
+        await loadPokemon();
+        renderPokemonDetails(pokemonIndex + 1);
+    } else {
+        renderPokemonDetails(pokemonIndex + 1);
+    }
+    disableEnableButtons();
+}
+
+
+function backward(pokemonIndex) {
+    renderPokemonDetails(pokemonIndex - 1);
+    disableEnableButtons();
+}
+
+
+/**
+ * disable the navigation button on pokemon details card, afer move forward or bachward an enable it again after 300 milliseconds
+ */
+function disableEnableButtons() {
+    let forwardButton = document.getElementById('forward');
+    let backwardButton = document.getElementById('backward');
+    forwardButton.disabled = true;
+    forwardButton.classList.add('disabled');
+    backwardButton.disabled = true;
+    backwardButton.classList.add('disabled');
+    setTimeout(() => {
+        forwardButton.disabled = false;
+        forwardButton.classList.remove('disabled');
+        backwardButton.disabled = false;
+        backwardButton.classList.remove('disabled');
+    }, 300);
 }
 
 
@@ -285,11 +357,13 @@ async function getPokemonEvolutionChain(pokemonIndex) {
     let pokemonSpeciesUrl = loadedPokemon[pokemonIndex]['species']['url'];
     let pokemonSpecies = await fetch(pokemonSpeciesUrl);
     let pokemonSpeciesAsJson = await pokemonSpecies.json();
-    let pokemonEvolutionChainUrl = pokemonSpeciesAsJson['evolution_chain']['url'];
-    let pokemonEvolutionChain = await fetch(pokemonEvolutionChainUrl);
-    let pokemonEvolutionChainAsJson = await pokemonEvolutionChain.json();
-    renderPokemonDetailsEvolutionChainContainer();
-    renderPokemonDetailsEvolutionChain(pokemonEvolutionChainAsJson);
+    if (pokemonSpeciesAsJson.evolution_chain !== null) {
+        let pokemonEvolutionChainUrl = pokemonSpeciesAsJson['evolution_chain']['url'];
+        let pokemonEvolutionChain = await fetch(pokemonEvolutionChainUrl);
+        let pokemonEvolutionChainAsJson = await pokemonEvolutionChain.json();
+        renderPokemonDetailsEvolutionChainContainer();
+        renderPokemonDetailsEvolutionChain(pokemonEvolutionChainAsJson);
+    }
 }
 
 

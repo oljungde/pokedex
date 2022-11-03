@@ -1,5 +1,7 @@
 let themeSwitchBtns;
 let nextPokemonList = 'https://pokeapi.co/api/v2/pokemon/';
+let previousPokemonList = 'https://pokeapi.co/api/v2/pokemon/?offset=1140&limit=20';
+let numberOfAllPokemon;
 let loadedPokemon = [];
 let currentPokemon = 0;
 let searchInput = document.getElementById('search');
@@ -37,15 +39,18 @@ function themeChange() {
  * loading function for Pokemon, every execution is loading 20 Pokemon
  */
 async function loadPokemon() {
-    let response = await fetch(nextPokemonList);
-    let responseAsJSON = await response.json();
-    nextPokemonList = responseAsJSON.next;
-    for (let i = 0; i < responseAsJSON.results.length; i++) {
-        let pokemonResponse = await fetch(responseAsJSON.results[i].url);
-        let pokemonAsJson = await pokemonResponse.json();
-        loadedPokemon.push(pokemonAsJson);
+    if (loadedPokemon.length != numberOfAllPokemon) {
+        let response = await fetch(nextPokemonList);
+        let responseAsJSON = await response.json();
+        numberOfAllPokemon = responseAsJSON.count
+        nextPokemonList = responseAsJSON.next;
+        for (let i = 0; i < responseAsJSON.results.length; i++) {
+            let pokemonResponse = await fetch(responseAsJSON.results[i].url);
+            let pokemonAsJson = await pokemonResponse.json();
+            loadedPokemon.push(pokemonAsJson);
+        }
+        renderAllPokemon();
     }
-    renderAllPokemon();
 }
 
 

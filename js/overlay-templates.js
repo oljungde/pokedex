@@ -38,7 +38,7 @@ function pokemonDetailsTemplate(pokemonType0) {
 
 /**
  * @param {string} pokemonType0 is the name of main type of pokemon
- * @param {*} pokemonType1 is the name of the addinional pokemon type
+ * @param {string} pokemonType1 is the name of the addinional pokemon type
  * @returns the html code for redering two pokemon types
  */
 function pokemonDetailsDataTwoTypesTemplate(pokemonType0, pokemonType1) {
@@ -65,7 +65,6 @@ function pokemonDetailsDataOneTypeTemplate(pokemonType0) {
 
 
 /**
- * 
  * @param {number} pokemonSize is the height of the pokemon
  * @param {number}  pokemonKg is the weight of pokemon
  * @returns the html code to render height and weight of the pokemon
@@ -75,6 +74,20 @@ function pokemonDetailsBodyTemplate(pokemonSize, pokemonKg) {
         <div class="weight-container-overlay">
             <span><b>size:</b><br>${pokemonSize}m</span>
             <span><b>weight:</b><br>${pokemonKg}kg</span>
+        </div> 
+    `;
+}
+
+
+/**
+ * @param {number} pokemonIndex of array loadedPokemon
+ * @returns the html code to reder the forward and backward button on pokemon details card
+ */
+function pokemonDetailsNavigationTemplate(pokemonIndex) {
+    return /*html*/`
+        <div id="navigation_overlay" class="navigation-overlay">
+            <button id="backward" onclick="backward(${pokemonIndex})"><img src="./img/arrow-left.png" alt="arrow left"></button>
+            <button id="forward" onclick="forward(${pokemonIndex})"><img src="./img/arrow-right.png" alt="arrow right"></button>
         </div> 
     `;
 }
@@ -112,7 +125,7 @@ function pokemonDetailsAbilitiesContainerTemplate() {
  */
 function pokemonDetailsAbilityTemplate(pokemonAbility) {
     return /*html*/`
-            <span>${pokemonAbility['ability']['name']}</span><br>
+            <span>${pokemonAbility['ability']['name']},\xa0</span> 
     `;
 }
 
