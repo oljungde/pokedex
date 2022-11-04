@@ -49,7 +49,7 @@
     background: url('./../img/bg.png')no-repeat -10% -80%;
     background-size: 130%;
     width: 500px;
-    height: 100%;
+    max-height: 880px;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -191,7 +191,7 @@
 
 #pokemon_abilities,
 #pokemon_stats {
-    margin-bottom: 16px;
+    margin: 8px 0 16px;
 
     h3 {
         margin-bottom: 4px;
@@ -238,4 +238,94 @@
 
 .disabled {
     pointer-events: none;
+}
+
+@media (max-width: 576px) {
+
+    #pokemon_details {
+        width: 400px;
+        max-height: 800px;
+    }
+
+    .weight-container-overlay {
+
+        span {
+            width: 80px;
+        }
+    }
+
+    .circle {
+        width: 200px;
+        height: 200px;
+
+        img {
+            width: 150px;
+            height: 150px;
+        }
+    }
+}
+
+@media (max-width: 456px) {
+
+    #pokemon_details {
+        width: 300px;
+        max-height: 716px;
+    }
+
+    .weight-container-overlay {
+        padding: 0 8px;
+
+        span {
+            width: 60px;
+        }
+    }
+
+    .navigation-overlay {
+        margin-top: 16px;
+        padding: 0 8px;
+    }
+
+    .circle {
+        width: 150px;
+        height: 150px;
+        top: 140px;
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+
+    .details-switch {
+        margin-bottom: 8px;
+        padding: 8px 0;
+    }
+
+    .evolution-step img {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 320px) {
+
+    #pokemon_details {
+        width: 264px;
+        max-height: 700px;
+    }
+
+    .weight-container-overlay {
+        margin-top: 16px;
+    }
+
+    .circle {
+        width: 140px;
+        height: 140px;
+        top: 160px;
+
+        img {
+            width: 90px;
+            height: 90px;
+        }
+    }
 }
