@@ -1,3 +1,7 @@
+/**
+ * is the light theme choosen?
+ * @returns the html code for the ckecked theme change input, if it's checked the light theme will be load
+ */
 function themeCheckLightThemeTemplate() {
     return /*html*/ `
         <input type="checkbox" class="checkbox" id="checkbox" checked>
@@ -10,6 +14,10 @@ function themeCheckLightThemeTemplate() {
 }
 
 
+/**
+ * is the dark theme choosen?
+ * @returns the html code for the ckecked theme change input, if it's not checked the dark theme will be load
+ */
 function themeCheckDarkThemeTemplate() {
     return  /*html*/ `
         <input type="checkbox" class="checkbox" id="checkbox">

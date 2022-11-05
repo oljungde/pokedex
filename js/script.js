@@ -18,6 +18,9 @@ async function init() {
 }
 
 
+/**
+ * check the local storage for theme setting and render the theme change input checked or not checked
+ */
 function themeCheck() {
     let themeChangeBtn = document.getElementById('theme_change');
     let theme = localStorage.getItem('data-theme');
@@ -175,38 +178,8 @@ function searchForm() {
  */
 async function getSearchTerm() {
     let search = document.getElementById('search').value;
-    if (search.length == 0) {
-        emtySearchTerm();
-    } else if (search.length < 3) {
-        toShortSearchTerm();
-    } else {
-        search = search.toLowerCase();
-        loadSearchedPokemon(search);
-    }
-}
-
-
-/**
- * load all pokemon if search term is emty 
- */
-function emtySearchTerm() {
-    let pokemonContainer = document.getElementById('all_pokemon');
-    pokemonContainer.innerHTML = '';
-    nextPokemonList = 'https://pokeapi.co/api/v2/pokemon/';
-    loadPokemon();
-    isSearchResult = false;
-}
-
-
-/**
- * shows a message if search term is less than 3 letters
- */
-function toShortSearchTerm() {
-    document.getElementById('search_message').classList.add('search-show');
-    setTimeout(() => {
-        document.getElementById('search_message').classList.remove('search-show');
-    }, 1750);
-    isSearchResult = false;
+    search = search.toLowerCase();
+    loadSearchedPokemon(search);
 }
 
 

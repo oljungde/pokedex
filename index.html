@@ -31,8 +31,10 @@
             </a>
 
             <div class="search-container">
-                <input id="search" type="text" placeholder="search..." autocomplete="off" class="search-input">
-                <button id="search_btn" onclick="getSearchTerm()"><img src="./img/search.png" alt="search"></button>
+                <form onsubmit="getSearchTerm(); return false">
+                    <input id="search" type="text" placeholder="search..." required minlength="3" autocomplete="off" class="search-input">
+                    <button id="search_btn"><img src="./img/search.png" alt="search"></button>
+                </form>
             </div>
             <div id="search_message" class="search-message">
                 Please enter at least three letters.
