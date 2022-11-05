@@ -17,7 +17,7 @@
     left: 0;
     display: flex;
     justify-content: center;
-    padding: 48px;
+    padding: 48px 0 0;
     z-index: 2;
 
     ::-webkit-scrollbar {
@@ -257,10 +257,16 @@
     .circle {
         width: 200px;
         height: 200px;
+        top: 130px;
 
         img {
             width: 150px;
             height: 150px;
+
+            &:hover {
+                width: 160px;
+                height: 160px;
+            }
         }
     }
 }
@@ -268,6 +274,8 @@
 @media (max-width: 456px) {
 
     #pokemon_details {
+        background: url('./../img/bg.png')no-repeat -10% -30%;
+        background-size: 130%;
         width: 300px;
         max-height: 716px;
     }
@@ -288,11 +296,16 @@
     .circle {
         width: 150px;
         height: 150px;
-        top: 140px;
+        top: 130px;
 
         img {
             width: 100px;
             height: 100px;
+
+            &:hover {
+                width: 110px;
+                height: 110px;
+            }
         }
     }
 
@@ -321,11 +334,16 @@
     .circle {
         width: 140px;
         height: 140px;
-        top: 160px;
+        top: 140px;
 
         img {
             width: 90px;
             height: 90px;
+
+            &:hover {
+                width: 100px;
+                height: 100px;
+            }
         }
     }
 }

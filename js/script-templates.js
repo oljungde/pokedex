@@ -1,3 +1,27 @@
+function themeCheckLightThemeTemplate() {
+    return /*html*/ `
+        <input type="checkbox" class="checkbox" id="checkbox" checked>
+        <label for="checkbox" class="label">
+            <img src="./img/moon.png" alt="">
+            <img src="./img/sun.png" alt="">
+            <div class="ball">
+        </label>
+    `;
+}
+
+
+function themeCheckDarkThemeTemplate() {
+    return  /*html*/ `
+        <input type="checkbox" class="checkbox" id="checkbox">
+        <label for="checkbox" class="label">
+            <img src="./img/moon.png" alt="">
+            <img src="./img/sun.png" alt="">
+            <div class="ball">
+        </label>
+    `;
+}
+
+
 /**
  * @param {number} pokemonIndex is the index of the pokemon from array "loadedPokemon"
  * @param {string} type0 is the type of pokemon, e.g. grass, is used to set background color of pokemon card

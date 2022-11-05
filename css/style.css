@@ -135,7 +135,7 @@ body[data-theme=light-theme] {
   left: 0;
   display: flex;
   justify-content: center;
-  padding: 48px;
+  padding: 48px 0 0;
   z-index: 2;
 }
 .pokemon-overlay ::-webkit-scrollbar {
@@ -355,14 +355,21 @@ body[data-theme=light-theme] {
   .circle {
     width: 200px;
     height: 200px;
+    top: 130px;
   }
   .circle img {
     width: 150px;
     height: 150px;
   }
+  .circle img:hover {
+    width: 160px;
+    height: 160px;
+  }
 }
 @media (max-width: 456px) {
   #pokemon_details {
+    background: url("./../img/bg.png") no-repeat -10% -30%;
+    background-size: 130%;
     width: 300px;
     max-height: 716px;
   }
@@ -379,11 +386,15 @@ body[data-theme=light-theme] {
   .circle {
     width: 150px;
     height: 150px;
-    top: 140px;
+    top: 130px;
   }
   .circle img {
     width: 100px;
     height: 100px;
+  }
+  .circle img:hover {
+    width: 110px;
+    height: 110px;
   }
   .details-switch {
     margin-bottom: 8px;
@@ -405,11 +416,15 @@ body[data-theme=light-theme] {
   .circle {
     width: 140px;
     height: 140px;
-    top: 160px;
+    top: 140px;
   }
   .circle img {
     width: 90px;
     height: 90px;
+  }
+  .circle img:hover {
+    width: 100px;
+    height: 100px;
   }
 }
 html,

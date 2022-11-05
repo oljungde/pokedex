@@ -1,6 +1,5 @@
 let themeSwitchBtns;
 let nextPokemonList = 'https://pokeapi.co/api/v2/pokemon/';
-let previousPokemonList = 'https://pokeapi.co/api/v2/pokemon/?offset=1140&limit=20';
 let numberOfAllPokemon;
 let loadedPokemon = [];
 let currentPokemon = 0;
@@ -19,17 +18,33 @@ async function init() {
 }
 
 
+function themeCheck() {
+    let themeChangeBtn = document.getElementById('theme_change');
+    let theme = localStorage.getItem('data-theme');
+    console.log(theme);
+    if (theme == 'light-theme') {
+        document.body.dataset.theme = 'light-theme';
+        themeChangeBtn.innerHTML = themeCheckLightThemeTemplate();
+    } else {
+        themeChangeBtn.innerHTML = themeCheckDarkThemeTemplate();
+    }
+}
+
+
 /**
  * function for theme change, with an event-listener
  */
 function themeChange() {
+    themeCheck();
     themeSwitchBtns = document.getElementById('checkbox');
     themeSwitchBtns.addEventListener('change', event => {
         let isChecked = event.target.checked;
         if (isChecked) {
             document.body.dataset.theme = 'light-theme';
+            localStorage.setItem('data-theme', 'light-theme');
         } else {
             document.body.dataset.theme = '';
+            localStorage.setItem('data-theme', '');
         }
     })
 }
