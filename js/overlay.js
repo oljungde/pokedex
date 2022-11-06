@@ -155,7 +155,7 @@ function renderPokemonDetailsName(pokemonIndex) {
 
 
 /**
- * check if pokemon as one or two types an render the type(s)
+ * check if pokemon as one or two types and render the type(s)
  * @param {number} pokemonIndex of the array loadedPokemon,
  */
 function renderPokemonDetailsData(pokemonIndex) {

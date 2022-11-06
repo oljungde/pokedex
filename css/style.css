@@ -1,6 +1,7 @@
 body {
   --color-background: #06090d;
   --color-font: #efefef;
+  --color-font-secondary: #172333;
   --color-font-placeholder: rgba(239, 239, 239, 0.5);
   --color-primary: #172333;
   --color-primary-light: #293E59;
@@ -13,6 +14,7 @@ body {
 body[data-theme=light-theme] {
   --color-background: #efefef;
   --color-font: #06090d;
+  --color-font-secondary: #172333;
   --color-font-placeholder: rgba(6, 9, 13, 0.5);
   --color-primary: #BDBDBD;
   --color-primary-light: #8A8A8A;
@@ -44,13 +46,16 @@ body[data-theme=light-theme] {
 .electric {
   background-color: #f8d135 !important;
   border: 2px solid #917A1F;
+}
+.electric h2,
+.electric span.electric {
   color: #172333;
 }
 
 .ice {
   background-color: #a1dbdc !important;
   border: 2px solid #567575;
-  color: #172333;
+  color: #172333 !important;
 }
 
 .fighting {
@@ -66,6 +71,10 @@ body[data-theme=light-theme] {
 .ground {
   background-color: #e2c370 !important;
   border: 2px solid #7D6C3E;
+  color: #172333 !important;
+}
+.ground h2,
+.ground span.ground {
   color: #172333;
 }
 
@@ -82,7 +91,6 @@ body[data-theme=light-theme] {
 .bug {
   background-color: #adbc21 !important;
   border: 2px solid #505710;
-  color: #172333;
 }
 
 .rock {
@@ -254,7 +262,7 @@ body[data-theme=light-theme] {
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 8px;
   text-align: center;
-  color: var(--color-primary);
+  color: var(--color-font-secondary);
 }
 
 .navigation-overlay {

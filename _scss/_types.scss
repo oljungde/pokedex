@@ -21,13 +21,17 @@
 .electric {
     background-color: #f8d135 !important;
     border: 2px solid #917A1F;
-    color: #172333;
+
+    h2,
+    span.electric {
+        color: #172333;
+    }
 }
 
 .ice {
     background-color: #a1dbdc !important;
     border: 2px solid #567575;
-    color: #172333;
+    color: #172333 !important;
 }
 
 .fighting {
@@ -43,7 +47,12 @@
 .ground {
     background-color: #e2c370 !important;
     border: 2px solid #7D6C3E;
-    color: #172333;
+    color: #172333 !important;
+
+    h2,
+    span.ground {
+        color: #172333;
+    }
 }
 
 .flying {
@@ -59,7 +68,7 @@
 .bug {
     background-color: #adbc21 !important;
     border: 2px solid #505710;
-    color: #172333;
+    // color: #172333;
 }
 
 .rock {
