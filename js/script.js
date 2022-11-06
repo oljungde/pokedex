@@ -24,7 +24,6 @@ async function init() {
 function themeCheck() {
     let themeChangeBtn = document.getElementById('theme_change');
     let theme = localStorage.getItem('data-theme');
-    console.log(theme);
     if (theme == 'light-theme') {
         document.body.dataset.theme = 'light-theme';
         themeChangeBtn.innerHTML = themeCheckLightThemeTemplate();
@@ -152,8 +151,11 @@ function renderPokemonImage(pokemonIndex) {
 */
 window.addEventListener('scroll', function () {
     if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
-        if (!isSearchResult) {
-            loadPokemon();
+        console.log(this.document.readyState);
+        if (this.document.readyState == 'complete') {
+            if (!isSearchResult) {
+                loadPokemon();
+            }
         }
     }
 })
