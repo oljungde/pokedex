@@ -151,11 +151,8 @@ function renderPokemonImage(pokemonIndex) {
 */
 window.addEventListener('scroll', function () {
     if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
-        console.log(this.document.readyState);
-        if (this.document.readyState == 'complete') {
-            if (!isSearchResult) {
-                loadPokemon();
-            }
+        if (!isSearchResult) {
+            loadPokemon();
         }
     }
 })
