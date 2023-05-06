@@ -34,6 +34,7 @@
     border: none;
     transform: scale(1);
     transition: all 75ms ease-in-out;
+    cursor: pointer;
 
     &:hover {
         transform: scale(1.1);
@@ -42,6 +43,7 @@
     img {
         width: 32px;
         height: 32px;
+        
     }
 }
 

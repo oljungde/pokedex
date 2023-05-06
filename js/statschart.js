@@ -32,22 +32,27 @@ const statsChartConfig = {
     options: {
         indexAxis: 'y',
         scales: {
-            xAxis: {
-                display: false
-            },
-            yAxis: {
+            x: {
+                display: true,
                 grid: {
                     display: false,
                     borderWidth: 0
                 }
-            }
+            },
+            y: {
+                display: true,
+                grid: {
+                    display: false,
+                    borderWidth: 0
+                }
+            },
         },
         plugins: {
             legend: {
                 display: false
             },
             datalabels: {
-                display: true,
+                display: false,
                 color: 'rgb(239, 239, 239)',
             },
             tooltip: {
