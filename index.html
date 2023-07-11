@@ -19,9 +19,12 @@
 </head>
 
 <body onload="init()">
+    <div id="loading" class="loading">
+        <span>Loading . . .</span>
+        <span class="loader"></span>
+    </div>
     <div id="pokemon_overlay" onclick="hidePokemonDetails()" class="pokemon-overlay display-none">
     </div>
-
     <div id="content">
         <header>
             <a href="./index.html">
@@ -30,31 +33,22 @@
                     <h1>Pokedex</h1>
                 </div>
             </a>
-
             <div class="search-container">
                 <form onsubmit="getSearchTerm(); return false">
                     <input id="search" type="text" placeholder="search..." required minlength="3" autocomplete="off" class="search-input">
                     <button id="search_btn"><img src="./img/search.png" alt="search"></button>
                 </form>
             </div>
-            <div id="search_message" class="search-message">
-                Please enter at least three letters.
-            </div>
-
+            <div id="search_message" class="search-message"> Please enter at least three letters. </div>
             <div id="theme_change">
-
             </div>
         </header>
-
         <div id="all_pokemon">
-
         </div>
         <footer>
-            <a href="./index.html">Startseite</a> |
-            <a href="./impressum.html">Impressum & Datenschutz</a>
+            <a href="./index.html">Startseite</a> | <a href="./impressum.html">Impressum & Datenschutz</a>
         </footer>
     </div>
-
 </body>
 
 </html>

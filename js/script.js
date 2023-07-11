@@ -56,6 +56,7 @@ function themeChange() {
  * loading function for Pokemon, every execution is loading 20 Pokemon
  */
 async function loadPokemon() {
+    loading();
     if (loadedPokemon.length != numberOfAllPokemon) {
         let response = await fetch(nextPokemonList);
         let responseAsJSON = await response.json();
@@ -68,6 +69,27 @@ async function loadPokemon() {
         }
         renderAllPokemon();
     }
+    loadingDone();
+}
+
+
+/**
+ * loading animation, when the function is called the loading animation is visible
+ */
+function loading() {
+    let htmlBody = document.body;
+    htmlBody.style.overflowY = 'hidden';
+    document.getElementById('loading').classList.remove('display-none');
+}
+
+
+/**
+ * loading animation, when the function is called the loading animation is not visible
+ */
+function loadingDone() {
+    let htmlBody = document.body;
+    htmlBody.style.overflowY = 'scroll';
+    document.getElementById('loading').classList.add('display-none');
 }
 
 
