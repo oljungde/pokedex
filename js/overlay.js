@@ -24,6 +24,7 @@ let pokemonOverlayBorder = [
   }
 ];
 let indexOfPokemon;
+let loadingInProgress = false;
 
 
 /**
@@ -159,20 +160,40 @@ function pokemonDetailsNavigationBlendOff(pokemonIndex) {
 
 
 /**
- * event listener for the navigation over arrow keys on pokemon details card
+ * add event listener to detect the input of the navigation keys left and right arrow
  */
 window.addEventListener('keydown', (event) => {
-  if (event.key == 'ArrowRight' && indexOfPokemon < numberOfAllPokemon - 1) {
+  if (event.key == 'ArrowRight') {
     console.log('right');
     forward(indexOfPokemon);
   }
-  if (event.key == 'ArrowLeft' && indexOfPokemon > 0) {
+  if (event.key == 'ArrowLeft') {
     console.log('left');
     backward(indexOfPokemon);
   }
 });
 
 
+/**
+ * disable the navigation keys left and right arrow
+ */
+function disableArrowKeys() {
+  window.addEventListener('keydown', disableEnableArrowKeys);
+}
+
+
+/**
+ * enable the navigation keys left and right arrow
+ */
+function enableArrowKeys() {
+  window.removeEventListener('keydown', disableEnableArrowKeys);
+}
+
+
+/**
+ * disable / enable the navigation keys left and right arrow
+ * @param {opject} event of pressed key
+ */
 let disableEnableArrowKeys = function (event) {
   switch (event.key) {
     case 'ArrowRight':
@@ -186,10 +207,14 @@ let disableEnableArrowKeys = function (event) {
 
 
 /**
- * load the next pokemon details card
- * @param {number} pokemonIndex of the array loadedPokemon
+ * load next pokemon detail card
+ * @param {number} pokemonIndex of array loadedPokemon
+ * @returns true or false if loading is in progress or not
  */
 async function forward(pokemonIndex) {
+  if (loadingInProgress) return;
+  loadingInProgress = true;
+  disableArrowKeys();
   loading();
   if (pokemonIndex == loadedPokemon.length - 1 && loadedPokemon.length < numberOfAllPokemon) {
     await loadPokemon();
@@ -199,16 +224,26 @@ async function forward(pokemonIndex) {
   }
   disableEnableButtons();
   loadingDone();
+  enableArrowKeys();
+  loadingInProgress = false;
+  let htmlBody = document.body;
+  htmlBody.style.overflowY = 'hidden';
 }
 
 
 /**
- * load the previous pokemon details card
- * @param {number} pokemonIndex of the array loadedPokemon
+ * load previous pokemon detail card
+ * @param {number} pokemonIndex of array loadedPokemon
+ * @returns true or false if loading is in progress or not
  */
 function backward(pokemonIndex) {
+  if (loadingInProgress) return;
+  loadingInProgress = true;
+  disableArrowKeys();
   renderPokemonDetails(pokemonIndex - 1);
   disableEnableButtons();
+  enableArrowKeys();
+  loadingInProgress = false;
 }
 
 
